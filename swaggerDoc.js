@@ -18,7 +18,7 @@ const option = {
             { auth: [] }
         ]
     },
-    apis: ['../controllers/codiv.js'],
+    apis: ['./controllers/codiv.js'],
 
 
 };
