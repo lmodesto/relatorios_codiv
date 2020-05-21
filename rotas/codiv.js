@@ -25,7 +25,7 @@ module.exports = function(app){
     var codivDAO = new app.persistencia.CodivDao(connection);
 
     const pageDefault = 1;
-    const limitDefault = 10;
+    const limitDefault = 100;
 
     const page = isNaN(req.query.page) ? pageDefault : req.query.page ;
     const limit = isNaN(req.query.limit) ? limitDefault : req.query.limit;
