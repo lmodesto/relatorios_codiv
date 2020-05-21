@@ -8,7 +8,7 @@ const option = {
             version: '1.0.0',
             description: 'Responsável por todos os relatórios da CODIV',
         },
-        basePath: '/api/codiv',
+        basePath: '/api/v1/codiv/relatorios/',
         securityDefinitions: {
             auth: {
                 type: "basic"
@@ -18,7 +18,7 @@ const option = {
             { auth: [] }
         ]
     },
-    apis: ['./controllers/codiv.js'],
+    apis: ['./rotas/codiv.js'],
 
 
 };
@@ -26,5 +26,5 @@ const option = {
 const specs = swaggerJsdoc(option);
 
 module.exports = (app) => {
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+    app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(specs));
 }

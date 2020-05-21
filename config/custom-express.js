@@ -14,7 +14,7 @@ module.exports = function(){
   consign()
    .include('controllers')
    .then('persistencia')
-   .then('servicos')
+   .then('rotas')
    .then('swaggerDoc.js')
    .into(app);
 
