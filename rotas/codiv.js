@@ -45,7 +45,6 @@ module.exports = function(app){
       var proximaPagina = parseInt(page) + parseInt(1);
       var fim = proximaPagina == page;
 
-      console.log(resultado.length);
       var response = {
         pagina: page,
         total_de_paginas: 3,
