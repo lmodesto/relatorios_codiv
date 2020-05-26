@@ -43,7 +43,7 @@ module.exports = function(app){
     codivDAO.paralisados(filtro,function(erro, resultado){
   
       var proximaPagina = parseInt(page) + parseInt(1);
-console.log(resultado.length);
+
 console.log(isNaN(resultado) ? 0 : resultado.length );
       var resultado_tamanho = 0;
 
