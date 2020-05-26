@@ -43,7 +43,6 @@ module.exports = function(app){
     codivDAO.paralisados(filtro,function(erro, resultado){
   
       var proximaPagina = parseInt(page) + parseInt(1);
-      var fim = resultado.length == page;
 
       var response = {
         pagina: page,
@@ -67,7 +66,6 @@ module.exports = function(app){
       response.total_de_registros = resultadoCount[0].totalRegistros;
 
       // última página não precisa apresentar o link
-      console.log(page >= response.total_de_paginas );
       if (page >= response.total_de_paginas){
         response.links = "[]";
       }
@@ -120,7 +118,6 @@ module.exports = function(app){
     codivDAO.paralisados(filtro,function(erro, resultado){
   
       var proximaPagina = parseInt(page) + parseInt(1);
-      var fim = proximaPagina == page;
 
       var response = {
         pagina: page,
