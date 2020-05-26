@@ -43,11 +43,14 @@ module.exports = function(app){
     codivDAO.paralisados(filtro,function(erro, resultado){
   
       var proximaPagina = parseInt(page) + parseInt(1);
+console.log(resultado.length);
+console.log(isNaN(resultado) ? 0 : resultado.length );
+      var resultado_tamanho = 0;
 
       var response = {
         pagina: page,
         total_de_paginas: 0,
-        registros: resultado.length,
+        registros: resultado_tamanho,
         total_de_registros: 0,
          paralisados: resultado,
             links: [
