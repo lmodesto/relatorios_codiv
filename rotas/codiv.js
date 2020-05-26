@@ -44,7 +44,7 @@ module.exports = function(app){
   
       var proximaPagina = parseInt(page) + parseInt(1);
 
-console.log(isNaN(resultado) ? 0 : resultado.length );
+console.log(isNaN(resultado) ? resultado.length : 0 );
       var resultado_tamanho = 0;
 
       var response = {
@@ -64,9 +64,13 @@ console.log(isNaN(resultado) ? 0 : resultado.length );
             //  console.log(response);
 
     codivDAO.totalRegistros(table,function(erro, resultadoCount){
-      
-      response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
-      response.total_de_registros = resultadoCount[0].totalRegistros;
+      if(isNaN(resultadoCount[0])){
+        response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
+        response.total_de_registros = resultadoCount[0].totalRegistros;
+      }else{
+        response.total_de_paginas = 0;
+        response.total_de_registros = 0;
+      }
 
       // última página não precisa apresentar o link
       if (page >= response.total_de_paginas){
