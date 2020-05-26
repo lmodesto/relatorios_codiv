@@ -43,15 +43,14 @@ module.exports = function(app){
     codivDAO.paralisados(filtro,function(erro, resultado){
   
       var proximaPagina = parseInt(page) + parseInt(1);
-      var fim = proximaPagina == page;
+      var fim = resultado.length == page;
 
       var response = {
         pagina: page,
-        total_de_paginas: 3,
+        total_de_paginas: 0,
         registros: resultado.length,
-        total_de_registros: 1,
+        total_de_registros: 0,
          paralisados: resultado,
-     //    if(fim){
             links: [
               {
                 href:"http://134.122.5.186:3000/api/v1/codiv/relatorios/paralisados?page="+proximaPagina+"&limit="+limit,
@@ -59,7 +58,6 @@ module.exports = function(app){
                 method:"GET"
               }                
             ]
-   //       }        
       }
             //  console.log(response);
 
@@ -67,6 +65,17 @@ module.exports = function(app){
       
       response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
       response.total_de_registros = resultadoCount[0].totalRegistros;
+
+      // última página não precisa apresentar o link
+      console.log(page >= response.total_de_paginas );
+      if (page >= response.total_de_paginas){
+        response.links = "[]";
+      }
+      // o numero de página maior que total de paguna zerar paginas e registros
+      if (page > response.total_de_paginas){
+        response.total_de_registros = 0;
+        response.total_de_paginas = 0;
+      }
       
       res.status(200).json(response);
     });
@@ -113,14 +122,12 @@ module.exports = function(app){
       var proximaPagina = parseInt(page) + parseInt(1);
       var fim = proximaPagina == page;
 
-      console.log(resultado.length);
       var response = {
         pagina: page,
         total_de_paginas: 3,
         registros: resultado.length,
         total_de_registros: 1,
         maiores_devedores: resultado,
-      //     if(fim){
             links: [
               {
                 href:"http://134.122.5.186/api/v1/codiv/relatorios/maiores_devedores?page="+proximaPagina+"&limit="+limit,
@@ -128,7 +135,6 @@ module.exports = function(app){
                 method:"GET"
               }                
             ]
-    //    }        
       }
             //  console.log(response);
 
