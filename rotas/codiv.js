@@ -25,7 +25,7 @@ module.exports = function(app){
     var codivDAO = new app.persistencia.CodivDao(connection);
 
     const pageDefault = 1;
-    const limitDefault = 100;
+    const limitDefault = 500;
 
     const page = isNaN(req.query.page) ? pageDefault : req.query.page ;
     const limit = isNaN(req.query.limit) ? limitDefault : req.query.limit;
@@ -44,8 +44,7 @@ module.exports = function(app){
   
       var proximaPagina = parseInt(page) + parseInt(1);
 
-console.log(isNaN(resultado) ? resultado.length : 0 );
-      var resultado_tamanho = 0;
+      var resultado_tamanho = isNaN(resultado) ? resultado.length : 0 ;
 
       var response = {
         pagina: page,
@@ -64,7 +63,7 @@ console.log(isNaN(resultado) ? resultado.length : 0 );
             //  console.log(response);
 
     codivDAO.totalRegistros(table,function(erro, resultadoCount){
-      if(isNaN(resultadoCount[0])){
+      if(isNaN(resultadoCount)){
         response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
         response.total_de_registros = resultadoCount[0].totalRegistros;
       }else{
