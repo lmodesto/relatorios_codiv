@@ -123,7 +123,7 @@ module.exports = function(app){
           total_de_paginas: 0,
           registros: resultado_tamanho,
           total_de_registros: 0,
-          paralisados: resultado,
+          maiores_devedores: resultado,
             links: [
                 {
                   href:"http://134.122.5.186:3000/api/v1/codiv/relatorios/maiores-devedores?page="+proximaPagina+"&limit="+limit,
