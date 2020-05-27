@@ -7,7 +7,7 @@ CodivDao.prototype.maioresDevedores = function(filtro, callback) {
 }
 
 CodivDao.prototype.paralisados = function(filtro, callback) {
-    this._connection.query(process.env.CODIV_PARALISADOS + filtro,callback);
+    this._connection.query("select * from CODIV_paralisados " + filtro,callback);
 }
 
 CodivDao.prototype.totalRegistros = function(table, callback) {

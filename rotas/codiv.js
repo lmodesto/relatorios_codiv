@@ -87,7 +87,7 @@ module.exports = function(app){
 
       /**
   * @swagger
-  * /maiores_devedores:
+  * /maiores-devedores:
   *   get:
   *    description: API de maiores_devedores
   *    responses:
