@@ -44,7 +44,7 @@ module.exports = function(app){
   
       var proximaPagina = parseInt(page) + parseInt(1);
 
-      var resultado_tamanho = isNaN(resultado) ? 0 : resultado.length;
+      var resultado_tamanho = isNaN(resultado) ? resultado.length : 0;
 
       var response = {
         pagina: page,
