@@ -3,7 +3,7 @@ function CodivDao(connection) {
 }
 
 CodivDao.prototype.maioresDevedores = function(filtro, callback) {
-    this._connection.query(process.env.CODIV_MAIORES_DEVEDORES +filtro,callback);
+    this._connection.query("SELECT  CERTIDAO_REAL,CONTRIBUINTE,CNPJ_RAIZ_REAL,NUMERO_PROCESSO_JUDICIAL,COMARCA,CLASSIFICACAO_RATING,SALDO_ATUAL,REGIONAL                 FROM CODIV_maiores_devedores " +filtro,callback);
 }
 
 CodivDao.prototype.paralisados = function(filtro, callback) {
@@ -11,7 +11,7 @@ CodivDao.prototype.paralisados = function(filtro, callback) {
 }
 
 CodivDao.prototype.totalRegistros = function(table, callback) {
-    this._connection.query(process.env.TOTAL_REGISTROS + table ,callback);
+    this._connection.query("select count(*) as totalRegistros from " + table ,callback);
 }
 
 

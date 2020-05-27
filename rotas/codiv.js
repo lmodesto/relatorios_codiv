@@ -22,8 +22,8 @@ module.exports = function(app){
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
-    const pageDefault = process.env.PAGE_PARALISADOS;
-    const limitDefault = process.env.LIMIT_PARALISADOS;
+    const pageDefault = 1;
+    const limitDefault = 500;
 
     const page = isNaN(req.query.page) ? pageDefault : req.query.page ;
     const limit = isNaN(req.query.limit) ? limitDefault : req.query.limit;
@@ -48,7 +48,7 @@ module.exports = function(app){
             paralisados: resultado,
               links: [
                   {
-                    href:"http://"+process.env.HOST+"/api/v1/codiv/relatorios/paralisados?page="+proximaPagina+"&limit="+limit,
+                    href:"http://134.122.5.186:3000/api/v1/codiv/relatorios/paralisados?page="+proximaPagina+"&limit="+limit,
                     rel:"next",
                     method:"GET"
                   }                
@@ -98,8 +98,8 @@ module.exports = function(app){
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
-    const pageDefault = process.env.PAGE_MAIORES_DEVEDORES;
-    const limitDefault = process.env.LIMIT_MAIORES_DEVEDORES;
+    const pageDefault = 1;
+    const limitDefault = 500;
 
     const page = isNaN(req.query.page) ? pageDefault : req.query.page ;
     const limit = isNaN(req.query.limit) ? limitDefault : req.query.limit;
@@ -110,6 +110,8 @@ module.exports = function(app){
     const  filtro = " LIMIT " +startIndex+","+limit;
 
     console.log("Filtro :"+filtro)
+
+    const table = "CODIV_maiores_devedores";
 
     codivDAO.maioresDevedores(filtro,function(erro, resultado){
   
@@ -130,7 +132,7 @@ module.exports = function(app){
                 }                
             ]
         }
-  codivDAO.totalRegistros("CODIV_maiores_devedores",function(erro, resultadoCount){
+  codivDAO.totalRegistros(table,function(erro, resultadoCount){
       if(isNaN(resultadoCount)){
           response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
           response.total_de_registros = resultadoCount[0].totalRegistros;
