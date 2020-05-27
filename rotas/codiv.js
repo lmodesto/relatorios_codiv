@@ -126,7 +126,7 @@ module.exports = function(app){
           paralisados: resultado,
             links: [
                 {
-                  href:"http://"+process.env.HOST+"/api/v1/codiv/relatorios/maiores-devedores?page="+proximaPagina+"&limit="+limit,
+                  href:"http://134.122.5.186:3000/api/v1/codiv/relatorios/maiores-devedores?page="+proximaPagina+"&limit="+limit,
                   rel:"next",
                   method:"GET"
                 }                
