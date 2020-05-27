@@ -1,13 +1,11 @@
 const auth = require('../config/basic/conf')
 const basicAuth = require('express-basic-auth');
 
-
 module.exports = function(app){
 
-  
   app.get('/api/v1/codiv', function(req, res){
     console.log('Recebida requisicao de teste na porta 3000.')
-    res.send('codiv.');
+    res.send("codiv");
   });
 
   /**
@@ -19,13 +17,13 @@ module.exports = function(app){
   *      '200':
   *        description: A successful response
   */
-  app.get('/api/v1/codiv/relatorios/paralisados', function(req, res){
+  app.get('/api/v1/codiv/relatorios/paralisados',function(req, res){
 //basicAuth( { authorizer: auth } )
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
-    const pageDefault = 1;
-    const limitDefault = 500;
+    const pageDefault = process.env.PAGE_PARALISADOS;
+    const limitDefault = process.env.LIMIT_PARALISADOS;
 
     const page = isNaN(req.query.page) ? pageDefault : req.query.page ;
     const limit = isNaN(req.query.limit) ? limitDefault : req.query.limit;
@@ -33,7 +31,6 @@ module.exports = function(app){
     const startIndex = (page -1) * limit;
     const endIndex = page * limit;
 
-    //  const  filtro = " LIMIT " +startIndex+","+endIndex;
     const  filtro = " LIMIT " +startIndex+","+limit;
 
     console.log("Filtro :"+filtro)
@@ -41,45 +38,40 @@ module.exports = function(app){
     const table = "CODIV_paralisados";
 
     codivDAO.paralisados(filtro,function(erro, resultado){
-  
-      var proximaPagina = parseInt(page) + parseInt(1);
-
-      var resultado_tamanho = isNaN(resultado) ? resultado.length : 0;
-
-      var response = {
-        pagina: page,
-        total_de_paginas: 0,
-        registros: resultado_tamanho,
-        total_de_registros: 0,
-         paralisados: resultado,
-            links: [
-              {
-                href:"http://134.122.5.186:3000/api/v1/codiv/relatorios/paralisados?page="+proximaPagina+"&limit="+limit,
-                rel:"next",
-                method:"GET"
-              }                
-            ]
-      }
-            //  console.log(response);
-
+        var proximaPagina = parseInt(page) + parseInt(1);
+        var resultado_tamanho = isNaN(resultado) ? resultado.length : 0;
+        var response = {
+            pagina: page,
+            total_de_paginas: 0,
+            registros: resultado_tamanho,
+            total_de_registros: 0,
+            paralisados: resultado,
+              links: [
+                  {
+                    href:"http://"+process.env.HOST+"/api/v1/codiv/relatorios/paralisados?page="+proximaPagina+"&limit="+limit,
+                    rel:"next",
+                    method:"GET"
+                  }                
+              ]
+          }
     codivDAO.totalRegistros(table,function(erro, resultadoCount){
-      if(isNaN(resultadoCount)){
-        response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
-        response.total_de_registros = resultadoCount[0].totalRegistros;
-      }else{
-        response.total_de_paginas = 0;
-        response.total_de_registros = 0;
-      }
+        if(isNaN(resultadoCount)){
+            response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
+            response.total_de_registros = resultadoCount[0].totalRegistros;
+        }else{
+            response.total_de_paginas = 0;
+            response.total_de_registros = 0;
+        }
 
-      // última página não precisa apresentar o link
-      if (page >= response.total_de_paginas){
-        response.links = "[]";
-      }
-      // o numero de página maior que total de paguna zerar paginas e registros
-      if (page > response.total_de_paginas){
-        response.total_de_registros = 0;
-        response.total_de_paginas = 0;
-      }
+        // última página não precisa apresentar o link
+        if (page >= response.total_de_paginas){
+            response.links = "[]";
+        }
+        // o numero de página maior que total de paguna zerar paginas e registros
+        if (page > response.total_de_paginas){
+            response.total_de_registros = 0;
+            response.total_de_paginas = 0;
+        }
       
       res.status(200).json(response);
     });
@@ -102,12 +94,12 @@ module.exports = function(app){
   *      '200':
   *        description: A successful response
   */
-  app.get('/api/codiv/maiores_devedores', function(req, res){
+  app.get('/api/v1/codiv/relatorios/maiores-devedores', function(req, res){
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
-    const pageDefault = 1;
-    const limitDefault = 10;
+    const pageDefault = process.env.PAGE_MAIORES_DEVEDORES;
+    const limitDefault = process.env.LIMIT_MAIORES_DEVEDORES;
 
     const page = isNaN(req.query.page) ? pageDefault : req.query.page ;
     const limit = isNaN(req.query.limit) ? limitDefault : req.query.limit;
@@ -119,35 +111,47 @@ module.exports = function(app){
 
     console.log("Filtro :"+filtro)
 
-    const table = "CODIV_maiores_devedores";
-
-    codivDAO.paralisados(filtro,function(erro, resultado){
+    codivDAO.maioresDevedores(filtro,function(erro, resultado){
   
       var proximaPagina = parseInt(page) + parseInt(1);
-
+//      var resultado_tamanho = isNaN(resultado.length) ? resultado.length : 0;
+      var resultado_tamanho = limit;
       var response = {
-        pagina: page,
-        total_de_paginas: 3,
-        registros: resultado.length,
-        total_de_registros: 1,
-        maiores_devedores: resultado,
+          pagina: page,
+          total_de_paginas: 0,
+          registros: resultado_tamanho,
+          total_de_registros: 0,
+          paralisados: resultado,
             links: [
-              {
-                href:"http://134.122.5.186/api/v1/codiv/relatorios/maiores_devedores?page="+proximaPagina+"&limit="+limit,
-                rel:"next",
-                method:"GET"
-              }                
+                {
+                  href:"http://"+process.env.HOST+"/api/v1/codiv/relatorios/maiores-devedores?page="+proximaPagina+"&limit="+limit,
+                  rel:"next",
+                  method:"GET"
+                }                
             ]
+        }
+  codivDAO.totalRegistros("CODIV_maiores_devedores",function(erro, resultadoCount){
+      if(isNaN(resultadoCount)){
+          response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
+          response.total_de_registros = resultadoCount[0].totalRegistros;
+      }else{
+          response.total_de_paginas = 0;
+          response.total_de_registros = 0;
       }
-            //  console.log(response);
 
-    codivDAO.totalRegistros(table,function(erro, resultadoCount){
-      
-      response.total_de_paginas = Math.round(resultadoCount[0].totalRegistros/limit);
-      response.total_de_registros = resultadoCount[0].totalRegistros;
-      
-      res.status(200).json(response);
-    });
+      // última página não precisa apresentar o link
+      if (page >= response.total_de_paginas){
+          response.links = "[]";
+      }
+      // o numero de página maior que total de paguna zerar paginas e registros
+      if (page > response.total_de_paginas){
+          response.total_de_registros = 0;
+          response.total_de_paginas = 0;
+      }
+    
+    res.status(200).json(response);
+  });
+
 
     return;
    });

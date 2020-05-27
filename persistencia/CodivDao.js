@@ -2,16 +2,16 @@ function CodivDao(connection) {
     this._connection = connection;
 }
 
-CodivDao.prototype.maiores_devedores = function(filtro, callback) {
-    this._connection.query('select * from CODIV_maiores_devedores'+filtro,callback);
+CodivDao.prototype.maioresDevedores = function(filtro, callback) {
+    this._connection.query(process.env.CODIV_MAIORES_DEVEDORES +filtro,callback);
 }
 
 CodivDao.prototype.paralisados = function(filtro, callback) {
-    this._connection.query('select * from CODIV_paralisados'+filtro,callback);
+    this._connection.query(process.env.CODIV_PARALISADOS + filtro,callback);
 }
 
 CodivDao.prototype.totalRegistros = function(table, callback) {
-    this._connection.query('select count(*) as totalRegistros from '+table ,callback);
+    this._connection.query(process.env.TOTAL_REGISTROS + table ,callback);
 }
 
 
