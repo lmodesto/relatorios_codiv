@@ -8,7 +8,7 @@ function createDBConnection(){
  //   password: 'root',
 //  database: 'payfast'
 
-host     : '178.128.227.84',
+host     : '209.97.142.8',
 port     : 3333,
 user     : 'mule',
 password : 'vert1234',
