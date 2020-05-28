@@ -13,6 +13,19 @@ module.exports = function(app){
   * /paralisados:
   *   get:
   *    description: API de paralisados
+  *    produces:
+  *      - application/json
+  *    parameters:
+  *      - name: page
+  *        description: Número da Página
+  *        requerid: false
+  *        type: integer
+  *        default: 1
+  *      - name: limit
+  *        description: Quantidade de registro por página
+  *        requerid: false
+  *        type: integer
+  *        default: 500
   *    responses:
   *      '200':
   *        description: A successful response
@@ -39,7 +52,8 @@ module.exports = function(app){
 
     codivDAO.paralisados(filtro,function(erro, resultado){
         var proximaPagina = parseInt(page) + parseInt(1);
-        var resultado_tamanho = isNaN(resultado) ? resultado.length : 0;
+//        var resultado_tamanho = isNaN(resultado) ? resultado.length : 0;
+        var resultado_tamanho = limit;
         var response = {
             pagina: page,
             total_de_paginas: 0,

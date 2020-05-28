@@ -1,8 +1,9 @@
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
-const option = {
-    swaggerDefinition:{
+const option = {  
+
+    swaggerDefinition:{  explorer: true,
         info:{
             title: 'API Relatórios CODIV',
             version: '1.0.0',
