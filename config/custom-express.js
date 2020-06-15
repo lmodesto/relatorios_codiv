@@ -15,6 +15,7 @@ module.exports = function(){
    .include('controllers')
    .then('persistencia')
    .then('rotas')
+   .then('services')
    .then('swaggerDoc.js')
    .into(app);
 
