@@ -50,10 +50,9 @@ const ECARTA_POR_RESULDADO = SELECT.concat(" * ")
                                 .concat(FROM)
                                 .concat(" CODIV_ecarta_por_resultado ");	
 
-const PROCESSOS_DIGITALIZADOS_MENSAL = SELECT.concat(" TOTAL_PROCESSOS_DIGITALIZADOS_MENSAL ")
-                                .concat(" INTERVALO_GRAFICO,DATA_ATUALIZACAO ")
+const PROCESSOS_DIGITALIZADOS_MENSAL = SELECT.concat(" * ")
                                 .concat(FROM)
-                                .concat(" CODIV_TOTAL_PROCESSOS_DIGITALIZADOS_MENSAL");
+                                .concat(" CODIV_total_processos_digitalizados_mensal ");
 
 const SENTENCIADOS = SELECT.concat(" * ")
                            .concat(FROM)
@@ -74,8 +73,32 @@ const TOTAL_REGISTROS = SELECT.concat(" count(*) as totalRegistros from ");
 
 
 
+
+CodivDao.prototype.ecartaPorResultado = function(filtro, callback) {
+    this._connection.query( ECARTA_POR_RESULDADO + filtro,callback);
+}
+
+CodivDao.prototype.reducaoQndProcessosFisicos = function(filtro, callback) {
+    this._connection.query( REDUCAO_QTD_PROCESSOS_FISICOS + filtro,callback);
+}
+
 CodivDao.prototype.relatorioprocessosPendentesCitacao = function(filtro, callback) {
     this._connection.query( RELATORIO_PROCESSOS_PENDENTES_CITACAO + filtro,callback);
+}
+
+CodivDao.prototype.rankingPorServentia = function(filtro, callback) {
+    this._connection.query( RANKING_POR_SERVENTIA + filtro,callback);
+}
+
+CodivDao.prototype.quantidadeProcessosEletronicosRelacaoAcervoGeral = function(filtro, callback) {
+    this._connection.query( QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL     + filtro,callback);
+}
+CodivDao.prototype.metaTrimestralReducaoAcervoGeral = function(filtro, callback) {
+    this._connection.query( META_TRIMESTRAL_REDUCAO_ACERVO_GERAL + filtro,callback);
+}
+
+CodivDao.prototype.metaPorServentia = function(filtro, callback) {
+    this._connection.query( META_POR_SERVENTIA + filtro,callback);
 }
 
 CodivDao.prototype.processosSemAndamento = function(filtro, callback) {
