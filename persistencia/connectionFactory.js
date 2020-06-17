@@ -12,7 +12,9 @@ host     : '209.97.142.8',
 port     : 3333,
 user     : 'mule',
 password : 'vert1234',
-database : 'muleestudo'
+database : 'muleestudo',
+connectionLimit : 3,
+
   });
 }
 //function createDBConnection(){
