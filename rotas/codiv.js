@@ -1,10 +1,12 @@
 const auth = require('../config/basic/conf')
 const basicAuth = require('express-basic-auth');
+const winston = require('winston');
+const logger = require('winston')
 
 module.exports = function(app){
 
   app.get('/api/v1/codiv', function(req, res){
-    console.log('Recebida requisicao de teste na porta 3000.')
+    logger.info('servidor iniciado');
     res.send("codiv");
   });
 

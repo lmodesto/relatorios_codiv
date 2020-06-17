@@ -6,6 +6,14 @@ const FROM = " FROM "
 
 
 
+const RELATORIO_PROCESSOS_PENDENTES_CITACAO = SELECT.concat(" * ")
+                                .concat(FROM)
+                                .concat(" CODIV_relatorio_processos_pendentes_citacao ");
+
+const PROCESSOS_SEM_ANDAMENTO = SELECT.concat(" * ")
+                                .concat(FROM)
+                                .concat(" CODIV_processos_sem_andamento ");
+
 const DATA_IMPLAMTACAO_SERVENTIA_ECARTA = SELECT.concat(" * ")
                                 .concat(FROM)
                                 .concat(" CODIV_data_implantacao_serventia_ecarta ");
@@ -49,7 +57,7 @@ const PROCESSOS_DIGITALIZADOS_MENSAL = SELECT.concat(" TOTAL_PROCESSOS_DIGITALIZ
 
 const SENTENCIADOS = SELECT.concat(" * ")
                            .concat(FROM)
-                           .concat(" CODIV_sentencia dos_cancelados_pagos");
+                           .concat(" CODIV_sentenciados_cancelados_pagos");
 
 const MAIORES_DEVEDORES = SELECT.concat(" CERTIDAO_REAL ")
                                 .concat("CERTIDAO_REAL,CONTRIBUINTE, ")
@@ -66,9 +74,18 @@ const TOTAL_REGISTROS = SELECT.concat(" count(*) as totalRegistros from ");
 
 
 
+CodivDao.prototype.relatorioprocessosPendentesCitacao = function(filtro, callback) {
+    this._connection.query( RELATORIO_PROCESSOS_PENDENTES_CITACAO + filtro,callback);
+}
+
+CodivDao.prototype.processosSemAndamento = function(filtro, callback) {
+    this._connection.query( PROCESSOS_SEM_ANDAMENTO + filtro,callback);
+}
+
 CodivDao.prototype.ecartasEmitidosTotal = function(filtro, callback) {
     this._connection.query( ECARTAS_EMITIDOS_TOTAL + filtro,callback);
 }
+
 CodivDao.prototype.ecaryasEmitidosServentia = function(filtro, callback) {
     this._connection.query( ECARTAS_EMITIDOS_SERVENTIA + filtro,callback);
 }
