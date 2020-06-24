@@ -1,8 +1,7 @@
-const logger = require('winston')
+const logger = require('../config/winston')
 
-
-module.exports.lista = (app, req, res) => {
-
+module.exports.ecartasEmitidosTotal = (app, req, res) => {
+  logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
   var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -17,11 +16,11 @@ module.exports.lista = (app, req, res) => {
 
     const filtro = " LIMIT " + startIndex + "," + limit;
 
-    logger.info("Filtro :" + filtro)
+    const table = "CODIV_ecartas_emitidos_total";
+    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
 
-    const table = "CODIV_relatorio_processos_pendentes_citacao";
-
-    codivDAO.relatorioprocessosPendentesCitacao(filtro, function (erro, resultado) {
+    codivDAO.ecartasEmitidosTotal(filtro, function (erro, resultado) {
       if (erro) {
         res.status(500).send(erro);
         return;
@@ -34,7 +33,7 @@ module.exports.lista = (app, req, res) => {
         total_de_paginas: 0,
         //      registros: resultado_tamanho,
         total_de_registros: 0,
-        relatorioprocessosPendentesCitacao: resultado,
+        ecartas_emitidos_total: resultado,
         links: [
           {
             href: "http://134.122.5.186:3000/api/v1/codiv/relatorios/sentenciados?page=" + proximaPagina + "&limit=" + limit,
@@ -70,4 +69,6 @@ module.exports.lista = (app, req, res) => {
       });
       return;
     });
+
+
 }

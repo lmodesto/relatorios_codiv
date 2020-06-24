@@ -5,7 +5,6 @@ const SELECT = " SELECT "
 const FROM = " FROM "
 
 
-
 const RELATORIO_PROCESSOS_PENDENTES_CITACAO = SELECT.concat(" * ")
                                 .concat(FROM)
                                 .concat(" CODIV_relatorio_processos_pendentes_citacao ");

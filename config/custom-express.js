@@ -2,6 +2,7 @@ var express = require('express');
 var consign = require('consign');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
+var addRequestId = require('express-request-id')();
 
 module.exports = function(){
   var app = express();
@@ -10,6 +11,7 @@ module.exports = function(){
   app.use(bodyParser.json());
 
   app.use(expressValidator());
+  app.use(addRequestId);
 
   consign()
    .include('controllers')

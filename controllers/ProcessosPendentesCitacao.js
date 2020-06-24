@@ -1,9 +1,8 @@
-const logger = require('winston')
+const logger = require('../config/winston')
 
-
-module.exports.lista = (app, req, res) => {
-
-  var connection = app.persistencia.connectionFactory();
+module.exports.processosPendentesCitacao = (app, req, res) => {
+    logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+    var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
     const pageDefault = 1;
@@ -17,9 +16,9 @@ module.exports.lista = (app, req, res) => {
 
     const filtro = " LIMIT " + startIndex + "," + limit;
 
-    logger.info("Filtro :" + filtro)
-
     const table = "CODIV_relatorio_processos_pendentes_citacao";
+    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
 
     codivDAO.relatorioprocessosPendentesCitacao(filtro, function (erro, resultado) {
       if (erro) {
