@@ -1,9 +1,10 @@
 version: '3'
 services: 
   nodejs:
-    image: node:8
+    image: node:10.15.1
     ports: 
        - 80:3000
+       - 3000:3001
     volumes:
         - /opt/relatorios_codiv/.env:/opt/env/.env
     environment:
