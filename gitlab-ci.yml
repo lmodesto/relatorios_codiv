@@ -1,0 +1,24 @@
+image: maven:3-jdk-8
+
+stages:
+  - build
+  - deploy
+
+build:
+  tags:
+    - docker
+
+  stage: build
+  artifacts:
+    paths:
+      -  target/*.zip 
+  script:
+    - mvn package
+  
+deploy project:
+  tags:
+    - docker
+  stage: deploy
+  script:
+    - cd /builds/vertigobr/gruposhark/customers-skf/target
+    - curl -F filetoupload=@/builds/vertigobr/gruposhark/customers-skf/target/customers-skf.zip http://18.231.131.131:6789/fileupload 

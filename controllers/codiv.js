@@ -1,5 +1,4 @@
-const logger = require('winston')
-
+const logger = require('../config/winston')
 
 module.exports.lista = (app, req, res) => {
 
