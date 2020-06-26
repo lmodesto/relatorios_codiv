@@ -1,4 +1,4 @@
-FROM node:laterst
+FROM node:10.15.1
 MAINTAINER Levi Modesto
 COPY . /var/www
 WORKDIR /var/www
