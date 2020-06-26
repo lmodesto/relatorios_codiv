@@ -3,7 +3,7 @@ services:
   nodejs:
     build: 
       context: .
-      dockerfile: Dockerfile.dockerfile
+      dockerfile: Dockerfile
     expose: 
       - "3000"
     command: npm server
