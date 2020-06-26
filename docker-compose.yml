@@ -4,6 +4,6 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    expose: 
-      - "3000"
-    command: node server
+    ports: 
+      - 80:3000
+    command: npm install && node ./server
