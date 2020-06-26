@@ -4,10 +4,7 @@ services:
     image: node:10.15.1
     ports: 
        - 80:3000
-       - 3000:3001
     volumes:
-        - /opt/relatorios_codiv/.env:/opt/env/.env
-    environment:
-        - IPAASVERTIGOURL=http://ip172-18-0-76-blddnbe4315g009ttlfg
-    command: bash -c "npm install  && node server"
+        - ./relatorios_codiv/env:/opt/env
+    command: bash -c "npm install  && node ./server"
     restart: always 
