@@ -1,4 +1,4 @@
-image: maven:3-jdk-8
+image: node:10.15.1
 
 stages:
   - build
@@ -12,13 +12,13 @@ build:
   artifacts:
     paths:
       -  target/*.zip 
-  script:
-    - mvn package
+  script: 
+    - npm install && npm ./server.js
   
 deploy project:
   tags:
     - docker
   stage: deploy
   script:
-    - cd /builds/vertigobr/gruposhark/customers-skf/target
-    - curl -F filetoupload=@/builds/vertigobr/gruposhark/customers-skf/target/customers-skf.zip http://18.231.131.131:6789/fileupload 
+    - cd /builds/vertigobr/tjrj/codiv/relatorios-codiv/target
+    - curl -F filetoupload=@/builds/vertigobr/tjrj/codiv/relatorios-codiv/target/relatorios-codiv.zip
