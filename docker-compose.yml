@@ -1,9 +1,12 @@
 version: '3'
 services: 
-  node:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+  nodejs:
+    image: node:8
     ports: 
-      - 80:3000
-    command: npm install && node ./server
+       - 80:3000
+    volumes:
+        - /opt/relatorios_codiv/.env:/opt/env/.env
+    environment:
+        - IPAASVERTIGOURL=http://ip172-18-0-76-blddnbe4315g009ttlfg
+    command: bash -c "npm install  && node server"
+    restart: always 
