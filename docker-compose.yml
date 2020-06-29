@@ -4,5 +4,4 @@ services:
     image: node:10.15.1
     ports: 
        - 80:3000
-    command: bash -c "npm install  && node server.js"
-    restart: always 
+    command: bash -c "npm install express && npm install app-root-path && npm install body-parser && npm install consign && npm install dotenv && npm install express-basic-auth && npm install express-request-id && npm install express-validator && npm install mysql && npm install restify && npm install soap && npm install swagger-jsdoc && npm install swagger-ui-express && npm install winston && node server.js"
