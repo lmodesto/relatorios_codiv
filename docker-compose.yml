@@ -5,6 +5,10 @@ services:
     volumes:
       - ./:/data
     working_dir: /data
+    env_file: env/.env
+    environment:
+      - A=$AAAA
+      - B=$BBBB
     ports: 
        - 3000:3000
     command: bash -c "npm install && npm start --cache /data/.npm"
