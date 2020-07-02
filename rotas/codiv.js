@@ -1,6 +1,7 @@
 const auth = require('../config/basic/conf')
 const basicAuth = require('express-basic-auth');
 const logger = require('../config/winston')
+const constants = require('../config/constants')
 
 module.exports = function (app) {
 
@@ -28,8 +29,9 @@ module.exports = function (app) {
   */
   app.get('/api/v1/codiv/relatorios/paralisados', function (req, res) {
     //basicAuth( { authorizer: auth } )
-    logger.info("Relatório Paralisados".concat(" - ID_Paralisados: "+req.id))
-    app.controllers.Paralisados.paralisados(app, req, res);
+    var log = constants.LOG_PARALISADOS + req.id;
+    logger.info(log)
+    app.controllers.Paralisados.paralisados(app, req, res,log);
   });
 
   /**
@@ -231,5 +233,19 @@ module.exports = function (app) {
     app.controllers.ProcessosPendentesCitacao.processosPendentesCitacao(app, req, res);
   });
 
+    /**
+   * @swagger
+   * /relatorio-processos-pendentes-citacao:
+   *   get:
+   *    description: API de Processos pendentes Citação
+   *    responses:
+   *      '200':
+   *        description: A successful response
+   */
+  app.get('/api/v1/codiv/relatorios/processos-pendentes-citacao', function (req, res) {
+    //basicAuth( { authorizer: auth } )
+    logger.info("Relatório Processos pendentes Citação".concat(" - ID_processos-pendentes-citacao: "+req.id))
+    app.controllers.ProcessosPendentesCitacao.processosPendentesCitacao(app, req, res);
+  });
 
 }

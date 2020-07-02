@@ -1,12 +1,13 @@
 const logger = require('../config/winston')
+const constants = require('../config/constants')
 
-module.exports.paralisados = (app, req, res) => {
-    logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+module.exports.paralisados = (app, req, res, log) => {
+    logger.info("Conectando Banco de dados: ".concat(log))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
-    const pageDefault = 1;
-    const limitDefault = 500;
+    const pageDefault = constants.PAGE_DEFAULT;
+    const limitDefault = constants.LIMIT_DEFAULT;
 
     const page = isNaN(req.query.page) ? pageDefault : req.query.page;
     const limit = isNaN(req.query.limit) ? limitDefault : req.query.limit;
@@ -15,15 +16,15 @@ module.exports.paralisados = (app, req, res) => {
     const endIndex = page * limit;
 
     const filtro = " LIMIT " + startIndex + "," + limit;
-    const table = "CODIV_p aralisados";
+    const table = "CODIV_paralisados";
 
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro Paralisados: " + filtro .concat(log))
+    logger.info("Tabela: " + table .concat(log))
 
     codivDAO.paralisados(filtro, function (erro, resultado) {
         if (erro) {
             res.status(500).send(erro);
-            logger.error("paralisados: "+erro .concat(" - ID_Paralisados: "+req.id))
+            logger.error("codivDAO.paralisados: "+erro .concat(log))
             return;
         }
         var proximaPagina = parseInt(page) + parseInt(1);
@@ -44,8 +45,10 @@ module.exports.paralisados = (app, req, res) => {
             ]
         }
         codivDAO.totalRegistros(table, function (erro, resultadoCount) {
+            logger.info("totalRegistros: ".concat(log))
 
             if (erro) {
+                logger.error("totalRegistros ERROR: ".concat(log))
                 res.status(500).send(erro);
                 return;
             }
