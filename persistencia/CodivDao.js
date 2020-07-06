@@ -73,66 +73,143 @@ const TOTAL_REGISTROS = SELECT.concat(" count(*) as totalRegistros from ");
 
 
 CodivDao.prototype.ecartaPorResultado = function(filtro, callback) {
-    this._connection.query( ECARTA_POR_RESULDADO + filtro,callback);
+    try {
+        this._connection.query( ECARTA_POR_RESULDADO + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
 }
 
 CodivDao.prototype.reducaoQndProcessosFisicos = function(filtro, callback) {
-    this._connection.query( REDUCAO_QTD_PROCESSOS_FISICOS + filtro,callback);
+    try{
+        this._connection.query( REDUCAO_QTD_PROCESSOS_FISICOS + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
 }
 
 CodivDao.prototype.relatorioprocessosPendentesCitacao = function(filtro, callback) {
-    this._connection.query( RELATORIO_PROCESSOS_PENDENTES_CITACAO + filtro,callback);
+    try{
+        this._connection.query( RELATORIO_PROCESSOS_PENDENTES_CITACAO + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
 }
 
 CodivDao.prototype.rankingPorServentia = function(filtro, callback) {
-    this._connection.query( RANKING_POR_SERVENTIA + filtro,callback);
+    try{    
+        this._connection.query( RANKING_POR_SERVENTIA + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
+
 }
 
 CodivDao.prototype.quantidadeProcessosEletronicosRelacaoAcervoGeral = function(filtro, callback) {
-    this._connection.query( QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL     + filtro,callback);
+    try{
+        this._connection.query( QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL     + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 CodivDao.prototype.metaTrimestralReducaoAcervoGeral = function(filtro, callback) {
-    this._connection.query( META_TRIMESTRAL_REDUCAO_ACERVO_GERAL + filtro,callback);
+    try{
+        this._connection.query( META_TRIMESTRAL_REDUCAO_ACERVO_GERAL + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
 CodivDao.prototype.metaPorServentia = function(filtro, callback) {
-    this._connection.query( META_POR_SERVENTIA + filtro,callback);
+    try{
+        this._connection.query( META_POR_SERVENTIA + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
+
 CodivDao.prototype.processosSemAndamento = function(filtro, callback) {
-    this._connection.query( PROCESSOS_SEM_ANDAMENTO + filtro,callback);
+    try{
+        this._connection.query( PROCESSOS_SEM_ANDAMENTO + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
 CodivDao.prototype.ecartasEmitidosTotal = function(filtro, callback) {
-    this._connection.query( ECARTAS_EMITIDOS_TOTAL + filtro,callback);
+    try{
+        this._connection.query( ECARTAS_EMITIDOS_TOTAL + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
 CodivDao.prototype.ecaryasEmitidosServentia = function(filtro, callback) {
-    this._connection.query( ECARTAS_EMITIDOS_SERVENTIA + filtro,callback);
+    try{
+        this._connection.query( ECARTAS_EMITIDOS_SERVENTIA + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
 CodivDao.prototype.dataImplantacaoServentiaEcarta = function(filtro, callback) {
-    this._connection.query( DATA_IMPLAMTACAO_SERVENTIA_ECARTA + filtro,callback);
+    try{
+        this._connection.query( DATA_IMPLAMTACAO_SERVENTIA_ECARTA + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
 CodivDao.prototype.processosDigitalizadosMensal = function(filtro, callback) {
-    this._connection.query( PROCESSOS_DIGITALIZADOS_MENSAL + filtro,callback);
+    try{
+        this._connection.query( PROCESSOS_DIGITALIZADOS_MENSAL + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
 CodivDao.prototype.sentenciados = function(filtro, callback) {
-    this._connection.query( SENTENCIADOS + filtro,callback);
+    try{
+        this._connection.query( SENTENCIADOS + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
 CodivDao.prototype.maioresDevedores = function(filtro, callback) {
-    this._connection.query(MAIORES_DEVEDORES +filtro,callback);
+    try {
+        this._connection.query(MAIORES_DEVEDORES +filtro,callback);
+    } finally {
+        this._connection.end;
+    }
 }
 
 CodivDao.prototype.paralisados = function(filtro, callback) {
-    this._connection.query(CODIV_paralisados + filtro,callback);
+    try{
+        this._connection.query(CODIV_paralisados + filtro,callback);
+    } finally {
+        this._connection.end;
+    }
+
 }
 
 CodivDao.prototype.totalRegistros = function(table, callback) {
-    this._connection.query(TOTAL_REGISTROS + table ,callback);
+    try{
+        this._connection.query(TOTAL_REGISTROS + table ,callback);
+    } finally {
+        this._connection.end;
+    }
 }
 
 
