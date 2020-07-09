@@ -65,7 +65,7 @@ const MAIORES_DEVEDORES = SELECT.concat(" CERTIDAO_REAL ")
 
 const CODIV_paralisados = SELECT.concat('   COD_COMARCA, DESC_COMARCA, COD_SERVENTIA ,    ')
                            .concat('		DESC_SERVENTIA, COD_COMP_DW, DESC_COMP, COD_CNJ, COD_TIP_AND, DESC_DEST ,                           ')
-                           .concat('		DATE_FORMAT(DT_INIC, "%d/%m/%Y") AS DT_INIC,  DESC_AND , COD_DEST                           ')
+                           .concat('		DATE_FORMAT(DT_INIC, "%d/%m/%Y") AS DT_INIC,  DESC_AND , COD_DEST, COD_DEST,TIMESTAMPDIFF(DAY,DT_INIC,CURDATE()) AS PERIODO_TEMPO                           ')
                            .concat(FROM)
                            .concat(" CODIV_paralisados");
 
