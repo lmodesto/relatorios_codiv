@@ -1,6 +1,7 @@
 const logger = require('../config/winston')
+const constants = require('../config/constants')
 
-module.exports.ecartasSmitidosServentia = (app, req, res) => {
+module.exports.ecartasEmitidosServentia = (app, req, res) => {
   logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
   var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);

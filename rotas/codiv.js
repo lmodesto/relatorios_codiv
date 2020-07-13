@@ -107,7 +107,7 @@ module.exports = function (app) {
   app.get('/api/v1/codiv/relatorios/ecartas-emitidos-serventia', function (req, res) {
     //basicAuth( { authorizer: auth } )
     logger.info("Relatório Ecartas Emitidos Serventia".concat(" - ID_ecartas-emitidos-serventia: "+req.id))
-    app.controllers.EcartasEmitidosServentia.ecartasEmitidosServentia(app, req, res);
+    app.controllers.EcartasEmitidosServentia.ecartasEmitidosServentia(app,req,res);
   });
 
   /**
@@ -227,7 +227,7 @@ module.exports = function (app) {
    *      '200':
    *        description: A successful response
    */
-  app.get('/api/v1/codiv/relatorios/processos-pendentes-citacao', function (req, res) {
+  app.get('/api/v1/codiv/relatorios/relatorio-processos-pendentes-citacao', function (req, res) {
     //basicAuth( { authorizer: auth } )
     logger.info("Relatório Processos pendentes Citação".concat(" - ID_processos-pendentes-citacao: "+req.id))
     app.controllers.ProcessosPendentesCitacao.processosPendentesCitacao(app, req, res);
