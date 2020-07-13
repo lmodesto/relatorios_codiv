@@ -155,7 +155,8 @@ CodivDao.prototype.ecartasEmitidosTotal = function(filtro, callback) {
 }
 
 CodivDao.prototype.ecaryasEmitidosServentia = function(filtro, callback) {
-    try{
+    
+    try{ 
         this._connection.query( ECARTAS_EMITIDOS_SERVENTIA + filtro,callback);
     } finally {
         this._connection.end;

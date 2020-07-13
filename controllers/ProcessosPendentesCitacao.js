@@ -21,6 +21,7 @@ module.exports.processosPendentesCitacao = (app, req, res) => {
     logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
 
     codivDAO.relatorioprocessosPendentesCitacao(filtro, function (erro, resultado) {
+  
       if (erro) {
         res.status(500).send(erro);
         return;

@@ -105,9 +105,10 @@ module.exports = function (app) {
   *        description: A successful response
   */
   app.get('/api/v1/codiv/relatorios/ecartas-emitidos-serventia', function (req, res) {
-    //basicAuth( { authorizer: auth } )
+    //basicAuth( { authorizer: auth } ) 
+    
     logger.info("Relatório Ecartas Emitidos Serventia".concat(" - ID_ecartas-emitidos-serventia: "+req.id))
-    app.controllers.EcartasEmitidosServentia.ecartasEmitidosServentiarelatorio-processos-pendentes-citacao(app,req,res);
+    app.controllers.EcartasEmitidosServentia.ecartasEmitidosServentia(app,req,res);
   });
 
   /**
