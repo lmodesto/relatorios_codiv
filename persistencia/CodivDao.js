@@ -92,7 +92,7 @@ CodivDao.prototype.reducaoQndProcessosFisicos = function(filtro, callback) {
 }
 
 CodivDao.prototype.relatorioprocessosPendentesCitacao = function(filtro, callback) {
-    try{
+    try{ 
         this._connection.query( RELATORIO_PROCESSOS_PENDENTES_CITACAO + filtro,callback);
     } finally {
         this._connection.end;

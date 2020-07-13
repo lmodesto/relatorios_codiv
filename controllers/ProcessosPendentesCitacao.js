@@ -14,7 +14,7 @@ module.exports.processosPendentesCitacao = (app, req, res) => {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const filtro = " LIMIT " + startIndex + "," + limit;
+    const filtro = " LIMIT " + startIndex + "," + limit; 
 
     const table = "CODIV_relatorio_processos_pendentes_citacao";
     logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
@@ -25,7 +25,7 @@ module.exports.processosPendentesCitacao = (app, req, res) => {
         res.status(500).send(erro);
         return;
       }
-      var proximaPagina = parseInt(page) + parseInt(1);
+      var proximaPagina = parseInt(page) + parseInt(1); 
       //      var resultado_tamanho = isNaN(resultado.length) ? resultado.length : 0;
       var resultado_tamanho = limit;
       var response = {
