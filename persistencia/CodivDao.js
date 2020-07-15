@@ -4,11 +4,11 @@ function CodivDao(connection) {
 const SELECT = " SELECT "
 const FROM = " FROM "
 
-const RELATORIO_PROCESSOS_PENDENTES_CITACAO = SELECT.concat(" * ")
+const RELATORIO_PROCESSOS_PENDENTES_CITACAO = SELECT.concat(" NUMERO_PROCESSO_CNJ,DATE_FORMAT(DATA_DISTRIBUICAO, '%d/%m/%Y') as DATA_DISTRIBUICAO,SERVENTIA,COMARCA,CODIGO_PROCESSO_ANTIGO ")
                                 .concat(FROM)
                                 .concat(" CODIV_relatorio_processos_pendentes_citacao ");
 
-const PROCESSOS_SEM_ANDAMENTO = SELECT.concat(" * ")
+const PROCESSOS_SEM_ANDAMENTO = SELECT.concat(" NUMERO_PROCESSO_CNJ,      CODIGO_PROCESSO_ANTIGO,      COMARCA,      SERVENTIA,      DATE_FORMAT(DATA_DISTRIBUICAO, '%d/%m/%Y') as DATA_DISTRIBUICAO ")
                                 .concat(FROM)
                                 .concat(" CODIV_processos_sem_andamento ");
 
@@ -65,7 +65,7 @@ const SENTENCIADOS = SELECT.concat(" CODIGO_PROCESSO,SITUACAO_PROCESSO,VALOR_CAU
 const MAIORES_DEVEDORES = SELECT.concat(" CERTIDAO_REAL ")
                                 .concat("CERTIDAO_REAL,CONTRIBUINTE, ")
                                 .concat("CNPJ_RAIZ_REAL,NUMERO_PROCESSO_JUDICIAL, ")
-                                .concat("COMARCA,CLASSIFICACAO_RATING,SALDO_ATUAL,REGIONAL, SERVENTIA, DATA_ENVIO  ")
+                                .concat("COMARCA,CLASSIFICACAO_RATING,SALDO_ATUAL,REGIONAL, SERVENTIA, DATE_FORMAT(DATA_ENVIO, '%d/%m/%Y') as DATA_ENVIO  ")
                                 .concat(FROM)
                                 .concat(" CODIV_maiores_devedores");
 
