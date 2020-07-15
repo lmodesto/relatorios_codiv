@@ -12,7 +12,7 @@ const PROCESSOS_SEM_ANDAMENTO = SELECT.concat(" * ")
                                 .concat(FROM)
                                 .concat(" CODIV_processos_sem_andamento ");
 
-const DATA_IMPLAMTACAO_SERVENTIA_ECARTA = SELECT.concat(" * ")
+const DATA_IMPLAMTACAO_SERVENTIA_ECARTA = SELECT.concat(" DATE_FORMAT(DATA_HABITACAO, '%d/%m/%Y') as DATA_HABITACAO,COMARCA, DATE_FORMAT(INICIO_IMPLANTACAO, '%d/%m/%Y') as INICIO_IMPLANTACAO,SERVENTIA")
                                 .concat(FROM)
                                 .concat(" CODIV_data_implantacao_serventia_ecarta ");
 								
