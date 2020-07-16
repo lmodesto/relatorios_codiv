@@ -32,7 +32,7 @@ const META_TRIMESTRAL_REDUCAO_ACERVO_GERAL = SELECT.concat(" * ")
                                 .concat(FROM)
                                 .concat(" CODIV_meta_trimestral_reducao_acervo_geral ");		
 
-const QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL = SELECT.concat('DATE_FORMAT(DATA_ATUALIZACAO, "%d/%m/%Y") as DATA_ATUALIZACAO')
+const QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL = SELECT.concat('DATE_FORMAT(DATA_ATUALIZACAO, "%d/%m/%Y") as DATA_ATUALIZACAO,')
                                 .concat('INTERVALO_GRAFICO,')
                                 .concat('QUANTIDADE_2019,')
                                 .concat('QUANTIDADE_DATA_ATUALIZACAO,')
