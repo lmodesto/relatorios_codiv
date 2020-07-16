@@ -1,7 +1,7 @@
 const logger = require('../config/winston')
 
 module.exports.processosDigitalizadosMensal = (app, req, res) => {
-    logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+    logger.info("Conectando Banco de dados".concat(" - ID_total_processos_digitalizados_mensal: "+req.id))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -17,8 +17,8 @@ module.exports.processosDigitalizadosMensal = (app, req, res) => {
     const filtro = " LIMIT " + startIndex + "," + limit;
 
     const table = "CODIV_total_processos_digitalizados_mensal";
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro Total Processos Digitalizados Mensal: " + filtro .concat(" - ID_total_processos_digitalizados_mensal: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_total_processos_digitalizados_mensal: "+req.id))
 
     codivDAO.processosDigitalizadosMensal(filtro, function (erro, resultado) {
         if (erro) {

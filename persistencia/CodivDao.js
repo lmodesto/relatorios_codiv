@@ -32,7 +32,11 @@ const META_TRIMESTRAL_REDUCAO_ACERVO_GERAL = SELECT.concat(" * ")
                                 .concat(FROM)
                                 .concat(" CODIV_meta_trimestral_reducao_acervo_geral ");		
 
-const QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL = SELECT.concat(" * ")
+const QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL = SELECT.concat('DATE_FORMAT(DATA_ATUALIZACAO, "%d/%m/%Y") as DATA_ATUALIZACAO')
+                                .concat('INTERVALO_GRAFICO,')
+                                .concat('QUANTIDADE_2019,')
+                                .concat('QUANTIDADE_DATA_ATUALIZACAO,')
+                                .concat('ANO')
                                 .concat(FROM)
                                 .concat(" CODIV_quantidade_processos_eletronicos_relacao_acervo_geral ");
 
@@ -48,7 +52,9 @@ const ECARTA_POR_RESULDADO = SELECT.concat(" * ")
                                 .concat(FROM)
                                 .concat(" CODIV_ecarta_por_resultado ");	
 
-const PROCESSOS_DIGITALIZADOS_MENSAL = SELECT.concat(" * ")
+const PROCESSOS_DIGITALIZADOS_MENSAL = SELECT.concat(" TOTAL_PROCESSOS_DIGITALIZADOS_MENSAL, ")
+                                .concat("INTERVALO_GRAFICO, ")
+                                .concat('DATE_FORMAT(DATA_ATUALIZACAO, "%d/%m/%Y") as DATA_ATUALIZACAO')
                                 .concat(FROM)
                                 .concat(" CODIV_total_processos_digitalizados_mensal ");
 

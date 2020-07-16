@@ -1,7 +1,7 @@
 const logger = require('../config/winston')
 
 module.exports.ecartasEmitidosTotal = (app, req, res) => {
-  logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+  logger.info("Conectando Banco de dados".concat(" - ID_ecartas_emitidos_total: "+req.id))
   var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -17,8 +17,8 @@ module.exports.ecartasEmitidosTotal = (app, req, res) => {
     const filtro = " LIMIT " + startIndex + "," + limit;
 
     const table = "CODIV_ecartas_emitidos_total";
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro Ecartas Emitidos Total: " + filtro .concat(" - ID_ecartas_emitidos_total: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_ecartas_emitidos_total: "+req.id))
 
     codivDAO.ecartasEmitidosTotal(filtro, function (erro, resultado) {
       if (erro) {

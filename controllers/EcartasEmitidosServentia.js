@@ -2,7 +2,7 @@ const logger = require('../config/winston')
 const constants = require('../config/constants')
 
 module.exports.ecartasEmitidosServentia = (app, req, res) => { 
-  logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+  logger.info("Conectando Banco de dados".concat(" - ID_ecartas_emitidos_serventia: "+req.id))
   var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -18,8 +18,8 @@ module.exports.ecartasEmitidosServentia = (app, req, res) => {
     const filtro = " LIMIT " + startIndex + "," + limit;
 
     const table = "CODIV_ecartas_emitidos_serventia";
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro Ecartas Emitidos Serventia: " + filtro .concat(" - ID_ecartas_emitidos_serventia: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_ecartas_emitidos_serventia: "+req.id))
 
     codivDAO.ecaryasEmitidosServentia(filtro, function (erro, resultado) {
       

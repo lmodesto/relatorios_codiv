@@ -1,7 +1,7 @@
 const logger = require('../config/winston')
 
 module.exports.metaTrimestralReducaoAcervoGeral = (app, req, res) => {
-    logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+    logger.info("Conectando Banco de dados".concat(" - ID_meta_trimestral_reducao_acervo_geral: "+req.id))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -17,8 +17,8 @@ module.exports.metaTrimestralReducaoAcervoGeral = (app, req, res) => {
     const filtro = " LIMIT " + startIndex + "," + limit;
 
     const table = "CODIV_meta_trimestral_reducao_acervo_geral";
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro Meta Trimestral Reducao Acervo Geral: " + filtro .concat(" - ID_meta_trimestral_reducao_acervo_geral: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_meta_trimestral_reducao_acervo_geral: "+req.id))
 
     codivDAO.metaTrimestralReducaoAcervoGeral(filtro, function (erro, resultado) {
       if (erro) {

@@ -1,7 +1,7 @@
 const logger = require('../config/winston')
 
 module.exports.quantidadeProcessosEletronicosRelacaoAcervoGeral = (app, req, res) => {
-    logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+    logger.info("Conectando Banco de dados".concat(" - ID_quantidade_processos_eletronicos_relacao_acervo_geral: "+req.id))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -17,8 +17,8 @@ module.exports.quantidadeProcessosEletronicosRelacaoAcervoGeral = (app, req, res
     const filtro = " LIMIT " + startIndex + "," + limit;
 
     const table = "CODIV_quantidade_processos_eletronicos_relacao_acervo_geral";
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro Quantidade Processos Eletronicos Relacao Acervo Geral: " + filtro .concat(" - ID_quantidade_processos_eletronicos_relacao_acervo_geral: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_quantidade_processos_eletronicos_relacao_acervo_geral: "+req.id))
 
     codivDAO.quantidadeProcessosEletronicosRelacaoAcervoGeral(filtro, function (erro, resultado) {
       if (erro) {

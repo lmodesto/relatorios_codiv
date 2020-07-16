@@ -1,6 +1,7 @@
 const logger = require('../config/winston')
 
 module.exports.sentenciados = (app, req, res) => {
+    logger.info("Conectando Banco de dados".concat(" - ID_sentenciados_cancelados_pagos: "+req.id))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -18,6 +19,8 @@ module.exports.sentenciados = (app, req, res) => {
     logger.info("Filtro :" + filtro)
 
     const table = "CODIV_sentenciados_cancelados_pagos";
+    logger.info("Filtro Setenciados Cancelados Pagos: " + filtro .concat(" - ID_sentenciados_cancelados_pagos: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_sentenciados_cancelados_pagos: "+req.id))
 
     codivDAO.sentenciados(filtro, function (erro, resultado) {
         if (erro) {

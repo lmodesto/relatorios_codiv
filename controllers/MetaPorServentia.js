@@ -1,7 +1,7 @@
 const logger = require('../config/winston')
 
 module.exports.metaPorServentia = (app, req, res) => {
-    logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+    logger.info("Conectando Banco de dados".concat(" - ID_meta_por_serventia: "+req.id))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -17,8 +17,8 @@ module.exports.metaPorServentia = (app, req, res) => {
     const filtro = " LIMIT " + startIndex + "," + limit;
 
     const table = " CODIV_meta_por_serventia ";
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro Meta por Serventia: " + filtro .concat(" - ID_meta_por_serventia: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_meta_por_serventia: "+req.id))
 
     codivDAO.metaPorServentia(filtro, function (erro, resultado) {
       if (erro) {

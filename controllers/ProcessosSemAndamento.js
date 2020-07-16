@@ -1,7 +1,7 @@
 const logger = require('../config/winston')
 
 module.exports.processosSemAndamento = (app, req, res) => {
-    logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+    logger.info("Conectando Banco de dados".concat(" - ID_processos_sem_andamento: "+req.id))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -17,8 +17,8 @@ module.exports.processosSemAndamento = (app, req, res) => {
     const filtro = " LIMIT " + startIndex + "," + limit;
 
     const table = "CODIV_processos_sem_andamento";
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro `Processos Sem Andamento`: " + filtro .concat(" - ID_processos_sem_andamento: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_processos_sem_andamento: "+req.id))
 
     codivDAO.processosSemAndamento(filtro, function (erro, resultado) {
       if (erro) {

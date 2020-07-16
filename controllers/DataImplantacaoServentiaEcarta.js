@@ -1,12 +1,13 @@
 const logger = require('../config/winston')
+const constants = require('../config/constants')
 
 module.exports.dataImplantacaoServentiaEcarta = (app, req, res) => {
-    logger.info("Conectando Banco de dados".concat(" - ID_Paralisados: "+req.id))
+    logger.info("Conectando Banco de dados".concat(" - ID_data_implantacao_serventia_ecarta: "+req.id))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
-    const pageDefault = 1;
-    const limitDefault = 500;
+    const pageDefault = constants.PAGE_DEFAULT;
+    const limitDefault = constants.LIMIT_DEFAULT;
 
     const page = isNaN(req.query.page) ? pageDefault : req.query.page;
     const limit = isNaN(req.query.limit) ? limitDefault : req.query.limit;
@@ -17,8 +18,8 @@ module.exports.dataImplantacaoServentiaEcarta = (app, req, res) => {
     const filtro = " LIMIT " + startIndex + "," + limit;
 
     const table = "CODIV_data_implantacao_serventia_ecarta";
-    logger.info("Filtro Paralisados: " + filtro .concat(" - ID_Paralisados: "+req.id))
-    logger.info("Tabela: " + table .concat(" - ID_Paralisados: "+req.id))
+    logger.info("Filtro Data Implantação Serventia Ecarta: " + filtro .concat(" - ID_data_implantacao_serventia_ecarta: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_data_implantacao_serventia_ecarta: "+req.id))
 
     codivDAO.dataImplantacaoServentiaEcarta(filtro, function (erro, resultado) {
         if (erro) {

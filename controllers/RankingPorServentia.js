@@ -3,7 +3,7 @@ const logger = require('../config/winston')
 
 
 module.exports.rankingPorServentia = (app, req, res) => {
-
+    logger.info("Conectando Banco de dados".concat(" - ID_ranking_por_serventia: "+req.id))
     var connection = app.persistencia.connectionFactory();
     var codivDAO = new app.persistencia.CodivDao(connection);
 
@@ -21,6 +21,8 @@ module.exports.rankingPorServentia = (app, req, res) => {
     logger.info("Filtro :" + filtro)
 
     const table = "CODIV_ranking_por_serventia";
+    logger.info("Filtro Ranking Por Serventia: " + filtro .concat(" - ID_ranking_por_serventia: "+req.id))
+    logger.info("Tabela: " + table .concat(" - ID_ranking_por_serventia: "+req.id))
 
     codivDAO.rankingPorServentia(filtro, function (erro, resultado) {
       if (erro) {
