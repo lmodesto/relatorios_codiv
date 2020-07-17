@@ -8,7 +8,7 @@ const RELATORIO_PROCESSOS_PENDENTES_CITACAO = SELECT.concat(" NUMERO_PROCESSO_CN
                                 .concat(FROM)
                                 .concat(" CODIV_relatorio_processos_pendentes_citacao ");
 
-const PROCESSOS_SEM_ANDAMENTO = SELECT.concat(" NUMERO_PROCESSO_CNJ,      CODIGO_PROCESSO_ANTIGO,      COMARCA,      SERVENTIA,      DATE_FORMAT(DATA_DISTRIBUICAO, '%d/%m/%Y') as DATA_DISTRIBUICAO ")
+const PROCESSOS_SEM_ANDAMENTO = SELECT.concat(" NUMERO_PROCESSO_CNJ,      CODIGO_PROCESSO_ANTIGO,      COMARCA,      SERVENTIA,      DATE_FORMAT(DATA_DISTRIBUICAO, '%Y-%m-%d') as DATA_DISTRIBUICAO_FORMATADA, DATA_DISTRIBUICAO ")
                                 .concat(FROM)
                                 .concat(" CODIV_processos_sem_andamento ");
 
