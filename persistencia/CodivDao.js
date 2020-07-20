@@ -4,7 +4,7 @@ function CodivDao(connection) {
 const SELECT = " SELECT "
 const FROM = " FROM "
 
-const RELATORIO_PROCESSOS_PENDENTES_CITACAO = SELECT.concat(" NUMERO_PROCESSO_CNJ,DATE_FORMAT(DATA_DISTRIBUICAO, '%d/%m/%Y') as DATA_DISTRIBUICAO,SERVENTIA,COMARCA,CODIGO_PROCESSO_ANTIGO ")
+const RELATORIO_PROCESSOS_PENDENTES_CITACAO = SELECT.concat("   NUMERO_PROCESSO_CNJ,DATE_FORMAT(DATA_DISTRIBUICAO, '%d/%m/%Y') as DATA_DISTRIBUICAO_FORMATADA, DATA_DISTRIBUICAO,SERVENTIA,COMARCA,CODIGO_PROCESSO_ANTIGO ")
                                 .concat(FROM)
                                 .concat(" CODIV_relatorio_processos_pendentes_citacao ");
 
@@ -12,27 +12,27 @@ const PROCESSOS_SEM_ANDAMENTO = SELECT.concat(" NUMERO_PROCESSO_CNJ,      CODIGO
                                 .concat(FROM)
                                 .concat(" CODIV_processos_sem_andamento ");
 
-const DATA_IMPLAMTACAO_SERVENTIA_ECARTA = SELECT.concat(" DATE_FORMAT(DATA_HABITACAO, '%d/%m/%Y') as DATA_HABITACAO,COMARCA, DATE_FORMAT(INICIO_IMPLANTACAO, '%d/%m/%Y') as INICIO_IMPLANTACAO,SERVENTIA")
+const DATA_IMPLAMTACAO_SERVENTIA_ECARTA = SELECT.concat(" DATE_FORMAT(DATA_HABITACAO, '%d/%m/%Y') as DATA_HABITACAO_FORMATADA, DATA_HABITACAO,COMARCA, DATE_FORMAT(INICIO_IMPLANTACAO, '%d/%m/%Y') as INICIO_IMPLANTACAO_FORMATADA,INICIO_IMPLANTACAO,SERVENTIA")
                                 .concat(FROM)
                                 .concat(" CODIV_data_implantacao_serventia_ecarta ");
 								
-const ECARTAS_EMITIDOS_SERVENTIA = SELECT.concat(" * ")
+const ECARTAS_EMITIDOS_SERVENTIA = SELECT.concat(" MES,DATE_FORMAT(ATUAL, '%d/%m/%Y') AS DATA_ATUAL_FORMATADA,DATA_ATUALSERVENTIA,QUANTIDADE,INTERVALO_VALORES_GRAFICOS ")
                                 .concat(FROM)
                                 .concat(" CODIV_ecartas_emitidos_serventia ");			
 								
-const ECARTAS_EMITIDOS_TOTAL = SELECT.concat(" * ")
+const ECARTAS_EMITIDOS_TOTAL = SELECT.concat(" MES,QUANTIDADE,INTERVALO_VALOR_GRAFICO ")
                                 .concat(FROM)
                                 .concat(" CODIV_ecartas_emitidos_total ");				
 
-const META_POR_SERVENTIA = SELECT.concat(" * ")
+const META_POR_SERVENTIA = SELECT.concat(" MES,QUANTIDADE,INTERVALO_VALOR_GRAFICO ")
                                 .concat(FROM)
                                 .concat(" CODIV_meta_por_serventia ");	
 								
-const META_TRIMESTRAL_REDUCAO_ACERVO_GERAL = SELECT.concat(" * ")
+const META_TRIMESTRAL_REDUCAO_ACERVO_GERAL = SELECT.concat(" DATE_FORMAT(DATA_ATUALIZACAO, '%d/%m/%Y') AS DATA_ATUALIZACAO_FORMATADA,DATA_ATUALIZACAO,REDUCAO_GERAL_ACERVO,PERCENTUAL_REDUCAO_GERAL_ACERVO,FALTA_ATINGIR_META_META_TRIMESTRAL_REDUCAO_GERAL_ACERVO,PERCENTUAL_FALTA_ATINGIR_META_TRIMESTRAL_REDUCAO_GERAL_ACERVO ")
                                 .concat(FROM)
                                 .concat(" CODIV_meta_trimestral_reducao_acervo_geral ");		
 
-const QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL = SELECT.concat('DATE_FORMAT(DATA_ATUALIZACAO, "%d/%m/%Y") as DATA_ATUALIZACAO,')
+const QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL = SELECT.concat('DATE_FORMAT(DATA_ATUALIZACAO, "%d/%m/%Y") as DATA_ATUALIZACAO_FORMATADA,DATA_ATUALIZACAO,')
                                 .concat('INTERVALO_GRAFICO,')
                                 .concat('QUANTIDADE_2019,')
                                 .concat('QUANTIDADE_DATA_ATUALIZACAO,')
@@ -40,29 +40,29 @@ const QTD_PROCESSOS_ELETRONICOS_RELACAO_ACERVO_GERAL = SELECT.concat('DATE_FORMA
                                 .concat(FROM)
                                 .concat(" CODIV_quantidade_processos_eletronicos_relacao_acervo_geral ");
 
-const RANKING_POR_SERVENTIA = SELECT.concat(" * ")
+const RANKING_POR_SERVENTIA = SELECT.concat(" SERVENTIAS,PROCESSOS_ELETRONICOS,PROCESSOS_FISICOS ")
                                 .concat(FROM)
                                 .concat(" CODIV_ranking_por_serventia ");
 								
-const REDUCAO_QTD_PROCESSOS_FISICOS = SELECT.concat(" * ")
+const REDUCAO_QTD_PROCESSOS_FISICOS = SELECT.concat(" REDUCAO_QUANTIDADE_PROCESSOS_FISICOS,PERCENTUAL_REDUCAO_QUANTIDADE_PROCESSOS_FISICOS,QUANTIDADE_PROCESSOS_PENDENTES,PERCENTUAL_PROCESSOS_PENDENTES,ANO ")
                                 .concat(FROM)
                                 .concat(" CODIV_reducao_quantidade_processos_fisicos ");
 								
-const ECARTA_POR_RESULDADO = SELECT.concat(" * ")
+const ECARTA_POR_RESULDADO = SELECT.concat(" POSITIVO,POSITIVO_PORCENTAGEM,NEGATIVO,NEGATIVO_PORCENTAGEM,SERVENTIA ")
                                 .concat(FROM)
                                 .concat(" CODIV_ecarta_por_resultado ");	
 
 const PROCESSOS_DIGITALIZADOS_MENSAL = SELECT.concat(" TOTAL_PROCESSOS_DIGITALIZADOS_MENSAL, ")
                                 .concat("INTERVALO_GRAFICO, ")
-                                .concat('DATE_FORMAT(DATA_ATUALIZACAO, "%d/%m/%Y") as DATA_ATUALIZACAO')
+                                .concat('DATE_FORMAT(DATA_ATUALIZACAO, "%d/%m/%Y") as DATA_ATUALIZACAO_FORMATADA, DATA_ATUALIZACAO')
                                 .concat(FROM)
                                 .concat(" CODIV_total_processos_digitalizados_mensal ");
 
 const SENTENCIADOS = SELECT.concat(" CODIGO_PROCESSO,SITUACAO_PROCESSO,VALOR_CAUSA,CODIGO_CLASSE,NOME_CLASSE ")
 .concat(" ,CODIGO_ASSUNTO,NOME_ASSUNTO,NOME_COMPETENCIA,CODIGO_COMPETENCIA,NOME_COMARCA ")
-.concat(" ,CODIGO_COMARCA,NOME_SERVENTIA,CODIGO_SERVENTIA,DATE_FORMAT(DATA_PRIMEIRA_DIST_PROCESSO, '%d/%m/%Y') AS DATA_PRIMEIRA_DIST_PROCESSO ")
+.concat(" ,CODIGO_COMARCA,NOME_SERVENTIA,CODIGO_SERVENTIA,DATE_FORMAT(DATA_PRIMEIRA_DIST_PROCESSO, '%d/%m/%Y') AS DATA_PRIMEIRA_DIST_PROCESSO_FORMATADA, DATA_PRIMEIRA_DIST_PROCESSO ")
 .concat(" ,CODIGO_AND,NOME_AND,CODIGO_TIPO_ATO_AND,NOME_TIPO_ATO_AND,CODIGO_ATO_JUIZ_AND,DESCRICAO_ATO_JUIZ_AND ")
-.concat(" ,DATE_FORMAT(DATA_INICIO_AND, '%d/%m/%Y') AS DATA_INICIO_AND,DATE_FORMAT(DATA_RETORNO_AND, '%d/%m/%Y') AS DATA_RETORNO_AND ")
+.concat(" ,DATE_FORMAT(DATA_INICIO_AND, '%d/%m/%Y') AS DATA_INICIO_AND_FORMATADA,DATA_INICIO_AND,DATE_FORMAT(DATA_RETORNO_AND, '%d/%m/%Y') AS DATA_RETORNO_AND_FORMATADA, DATA_RETORNO_AND ")
 .concat(" ,AND_ENCERRADO_S_N,PROCESSO_SETENCIADO_S_N,LOCALIZACAO_PROCESSO ")
 .concat(" ,PROCESSO_ELETRONICO_S_N ")
                            .concat(FROM)
@@ -71,7 +71,7 @@ const SENTENCIADOS = SELECT.concat(" CODIGO_PROCESSO,SITUACAO_PROCESSO,VALOR_CAU
 const MAIORES_DEVEDORES = SELECT.concat(" CERTIDAO_REAL ")
                                 .concat("CERTIDAO_REAL,CONTRIBUINTE, ")
                                 .concat("CNPJ_RAIZ_REAL,NUMERO_PROCESSO_JUDICIAL, ")
-                                .concat("COMARCA,CLASSIFICACAO_RATING,SALDO_ATUAL,REGIONAL, SERVENTIA, DATE_FORMAT(DATA_ENVIO, '%d/%m/%Y') as DATA_ENVIO  ")
+                                .concat("COMARCA,CLASSIFICACAO_RATING,SALDO_ATUAL,REGIONAL, SERVENTIA, DATE_FORMAT(DATA_ENVIO, '%d/%m/%Y') as DATA_ENVIO_FORMATADA, DATA_ENVIO ")
                                 .concat(FROM)
                                 .concat(" CODIV_maiores_devedores");
 
